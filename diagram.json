@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "author": "Bruno Zucker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": 35.4, "left": 79.6, "attrs": {} },
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 19.2, "left": -110.36, "attrs": {} },
+    { "type": "wokwi-ir-receiver", "id": "ir1", "top": -39.75, "left": -1.78, "attrs": {} },
+    { "type": "wokwi-ir-remote", "id": "remote1", "top": -67.2, "left": 412.8, "attrs": {} },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic1",
+      "top": -94.5,
+      "left": 149.5,
+      "attrs": { "distance": "289" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -51.6,
+      "left": 349.8,
+      "attrs": { "color": "red", "flip": "1" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -15.25,
+      "left": -115.2,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 110.4,
+      "left": 37.85,
+      "rotate": 90,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 282.35,
+      "left": 38.4,
+      "attrs": { "value": "2000" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:GND.1", "bb1:bn.1", "black", [ "h-19.05", "v76.8", "h211.2" ] ],
+    [ "esp:5V", "bb1:bp.1", "red", [ "h0.15", "v19.2", "h134.4", "v-28.8" ] ],
+    [ "ir1:GND", "bb1:bn.2", "black", [ "v163.2", "h-9.6", "v48", "h115.2" ] ],
+    [ "ir1:VCC", "bb1:bp.2", "red", [ "v86.4", "h86.4" ] ],
+    [ "esp:14", "ir1:DAT", "yellow", [ "h-19.05", "v-144", "h124.8", "v57.6", "h9.6" ] ],
+    [ "ultrasonic1:VCC", "bb1:bp.3", "red", [ "v19.2", "h-86.4" ] ],
+    [ "ultrasonic1:GND", "bb1:bn.3", "black", [ "v268.8", "h-116.4" ] ],
+    [
+      "esp:25",
+      "ultrasonic1:TRIG",
+      "blue",
+      [ "v-9.6", "h-38.25", "v-163.2", "h278.4", "v57.6", "h96" ]
+    ],
+    [ "led1:C", "bb1:bn.4", "black", [ "v259.2", "h-230.8" ] ],
+    [ "esp:13", "r1:1", "white", [ "h-76.65", "v-28.8" ] ],
+    [ "r1:2", "led1:A", "white", [ "v-96", "h402", "v96" ] ],
+    [ "ultrasonic1:ECHO", "r2:1", "blue", [ "v28.8", "h-173.6" ] ],
+    [ "r2:2", "r3:1", "blue", [ "h0" ] ],
+    [ "r3:1", "esp:18", "blue", [ "v0", "h-38.4", "v-163.2" ] ],
+    [ "r3:2", "bb1:bn.5", "black", [ "v0", "h56.4" ] ]
+  ],
+  "dependencies": {}
+}
